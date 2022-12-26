@@ -8,3 +8,15 @@ before_install:
 
 script:
   - docker run -e CI=true eguziy/frontend npm run test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: "ap-northeast-1"
+  app: "docker-frontend"
+  env: "Dockerfrontend-env"
+  bucket_name: "elasticbeanstalk-ap-northeast-1-775678912010"
+  bucket_path: "docker-frontend"
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
